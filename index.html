@@ -73,7 +73,7 @@
             async function fetchProducts() {
                 try {
                     // เพิ่ม cache-busting query parameter เพื่อดึงข้อมูลใหม่เสมอ
-                    const response = await fetch(`products.json?v=${new Date().getTime()}`);
+                    const response = await fetch(`./products.json?v=${new Date().getTime()}`);
                     if (!response.ok) {
                         throw new Error(`ไม่สามารถโหลดไฟล์ข้อมูลได้: ${response.statusText}`);
                     }
