@@ -8,7 +8,7 @@
     <!-- ใช้ Tailwind CSS เพื่อความสวยงามและ responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Sarabun & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
@@ -28,23 +28,23 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-blue-50 text-gray-800">
 
     <div class="container mx-auto p-4 md:p-8">
         
         <!-- ส่วนหัวและช่องค้นหา -->
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">นักช้อปฉลาดเลือก 🛒</h1>
-            <p class="text-gray-600 mt-2">เปรียบเทียบราคาสินค้าจาก Shopee และ TikTok หาดีลที่ดีที่สุดสำหรับคุณ</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-800">นักช้อปฉลาดเลือก 🛒</h1>
+            <p class="text-blue-600 mt-2">เปรียบเทียบราคาสินค้าจาก Shopee และ TikTok หาดีลที่ดีที่สุดสำหรับคุณ</p>
             <div class="mt-6 max-w-lg mx-auto">
-                <input type="text" id="search-box" placeholder="ค้นหาสินค้าที่ต้องการ..." class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                <input type="text" id="search-box" placeholder="ค้นหาสินค้าที่ต้องการ..." class="w-full p-3 border border-blue-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
             </div>
         </header>
 
         <!-- ส่วนแสดงผลสินค้า -->
         <main>
             <div id="loading-indicator" class="text-center py-10">
-                <p class="text-lg text-gray-500">กำลังโหลดข้อมูลสินค้า...</p>
+                <p class="text-lg text-blue-500">กำลังโหลดข้อมูลสินค้า...</p>
             </div>
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Product cards will be inserted here by JavaScript -->
@@ -55,7 +55,7 @@
         </main>
 
         <!-- ส่วนท้ายเว็บ -->
-        <footer class="text-center mt-12 text-gray-500 text-sm">
+        <footer class="text-center mt-12 text-blue-500 text-sm">
             <p>สร้างสรรค์โดยใช้ Google Sheets + GitHub Pages</p>
         </footer>
 
@@ -103,11 +103,8 @@
                     
                     let bestDeal = '';
                     if (shopeePrice > 0 && tiktokPrice > 0) {
-                        if (shopeePrice < tiktokPrice) {
-                            bestDeal = 'shopee';
-                        } else if (tiktokPrice < shopeePrice) {
-                            bestDeal = 'tiktok';
-                        }
+                        if (shopeePrice < tiktokPrice) bestDeal = 'shopee';
+                        else if (tiktokPrice < shopeePrice) bestDeal = 'tiktok';
                     } else if (shopeePrice > 0) {
                         bestDeal = 'shopee';
                     } else if (tiktokPrice > 0) {
@@ -122,32 +119,32 @@
                             <img src="${product.product_image_url}" alt="${product.product_name}" class="h-full w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/64748b?text=No+Image';">
                         </div>
                         <div class="p-4 flex-grow flex flex-col">
-                            <span class="text-xs font-semibold text-gray-500 uppercase">${product.category || 'ทั่วไป'}</span>
-                            <h3 class="text-lg font-bold mt-1 mb-2 flex-grow">${product.product_name}</h3>
+                            <span class="text-xs font-semibold text-blue-500 uppercase">${product.category || 'ทั่วไป'}</span>
+                            <h3 class="text-lg font-bold text-gray-900 mt-1 mb-2 flex-grow">${product.product_name}</h3>
                             
                             <!-- Price Comparison -->
                             <div class="space-y-3 mt-2">
                                 <!-- Shopee -->
-                                <a href="${product.shopee_link || '#'}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-lg border ${bestDeal === 'shopee' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'}">
+                                <a href="${product.shopee_link || '#'}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-lg border-2 transition ${bestDeal === 'shopee' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-400'}">
                                     <div class="flex items-center">
-                                        <img src="https://img.icons8.com/color/48/shopee.png" alt="Shopee Logo" class="w-6 h-6 mr-2">
-                                        <span class="font-semibold">Shopee</span>
-                                        ${bestDeal === 'shopee' ? '<span class="ml-2 text-xs font-bold text-orange-600">🔥 ดีลดีที่สุด</span>' : ''}
+                                        <svg class="w-6 h-6 mr-3 ${bestDeal === 'shopee' ? 'text-blue-500' : 'text-gray-400'}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                        <span class="font-semibold text-gray-800">Shopee</span>
+                                        ${bestDeal === 'shopee' ? '<span class="ml-2 text-xs font-bold text-blue-600">🔥 ดีลดีที่สุด</span>' : ''}
                                     </div>
-                                    <span class="text-lg font-bold ${bestDeal === 'shopee' ? 'text-orange-600' : 'text-gray-800'}">${shopeePrice > 0 ? `${shopeePrice.toLocaleString()} ฿` : 'N/A'}</span>
+                                    <span class="text-lg font-bold ${bestDeal === 'shopee' ? 'text-blue-600' : 'text-gray-800'}">${shopeePrice > 0 ? `${shopeePrice.toLocaleString()} ฿` : 'N/A'}</span>
                                 </a>
                                 <!-- TikTok -->
-                                <a href="${product.tiktok_link || '#'}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-lg border ${bestDeal === 'tiktok' ? 'border-black bg-gray-100' : 'border-gray-200'}">
+                                <a href="${product.tiktok_link || '#'}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-lg border-2 transition ${bestDeal === 'tiktok' ? 'border-sky-500 bg-sky-50' : 'border-gray-200 hover:border-sky-400'}">
                                     <div class="flex items-center">
-                                        <img src="https://img.icons8.com/color/48/tiktok-verified-account.png" alt="TikTok Logo" class="w-6 h-6 mr-2">
-                                        <span class="font-semibold">TikTok</span>
-                                        ${bestDeal === 'tiktok' ? '<span class="ml-2 text-xs font-bold text-black">🔥 ดีลดีที่สุด</span>' : ''}
+                                        <svg class="w-6 h-6 mr-3 ${bestDeal === 'tiktok' ? 'text-sky-500' : 'text-gray-400'}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c-3 0-5.5-1.5-5.5-4s2.5-4 5.5-4 5.5 1.5 5.5 4-2.5 4-5.5 4z"></path></svg>
+                                        <span class="font-semibold text-gray-800">TikTok</span>
+                                        ${bestDeal === 'tiktok' ? '<span class="ml-2 text-xs font-bold text-sky-600">🔥 ดีลดีที่สุด</span>' : ''}
                                     </div>
-                                    <span class="text-lg font-bold ${bestDeal === 'tiktok' ? 'text-black' : 'text-gray-800'}">${tiktokPrice > 0 ? `${tiktokPrice.toLocaleString()} ฿` : 'N/A'}</span>
+                                    <span class="text-lg font-bold ${bestDeal === 'tiktok' ? 'text-sky-600' : 'text-gray-800'}">${tiktokPrice > 0 ? `${tiktokPrice.toLocaleString()} ฿` : 'N/A'}</span>
                                 </a>
                             </div>
 
-                            ${product.notes ? `<p class="text-sm text-gray-600 mt-3"><strong>หมายเหตุ:</strong> ${product.notes}</p>` : ''}
+                            ${product.notes ? `<p class="text-sm text-gray-600 mt-4 pt-3 border-t border-gray-200"><strong>หมายเหตุ:</strong> ${product.notes}</p>` : ''}
                         </div>
                     `;
                     productGrid.appendChild(card);
@@ -158,8 +155,8 @@
             function filterProducts() {
                 const query = searchBox.value.toLowerCase();
                 const filtered = allProducts.filter(product => 
-                    product.product_name.toLowerCase().includes(query) ||
-                    product.category.toLowerCase().includes(query)
+                    (product.product_name && product.product_name.toLowerCase().includes(query)) ||
+                    (product.category && product.category.toLowerCase().includes(query))
                 );
                 renderProducts(filtered);
             }
